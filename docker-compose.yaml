@@ -1,0 +1,52 @@
+version: '1.0'
+
+services:
+
+    backend:
+        build:
+            context: .
+            dockerfile: docker/backend/Dockerfile
+        container_name: "backend"
+        restart: unless-stopped
+        tty: true
+        environment:
+            SERVICE_NAME: backend
+        working_dir: /var/www/backend
+        volumes:
+            - ./laravel/:/var/www/backend
+            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        networks:
+        - app-network
+    
+    frontend:
+        build:
+            context: .
+            dockerfile: docker/frontend/Dockerfile
+        container_name: "frontend"
+        working_dir: /usr/src/app/frontend
+        volumes: 
+            - ./angular/:/usr/src/app/frontend 
+        ports: 
+            - '4200:4200' 
+        command: > 
+            bash -c "npm install && ng serve --host 0.0.0.0 --port 4200"
+        networks:
+        - app-network
+
+    webserver:
+        image: nginx:alpine
+        container_name: "webserver"
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "8000:80"
+            - "443:443"
+        volumes:
+            - ./laravel/:/var/www/backend
+            - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+        networks:
+            - app-network
+
+networks:
+    app-network:
+        driver: bridge
