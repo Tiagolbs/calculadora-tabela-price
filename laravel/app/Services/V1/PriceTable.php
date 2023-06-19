@@ -2,6 +2,8 @@
 
 namespace App\Services\V1;
 
+use Carbon\Carbon;
+
 class PriceTable {
     public function generatePriceTable(float $financed_amount, float $interest_rate, int $number_of_months, float $initial_payment): array
     {
@@ -12,6 +14,8 @@ class PriceTable {
         $total_interest = 0;
         $total_amortization = 0;
         $total_installment_value = 0;
+
+        $payment_date = $this->getPaymentDate(Carbon::now());
 
         $price_table = [];
         $price_table[] = $this->createTableFirstRow($financed_amount);
@@ -30,11 +34,14 @@ class PriceTable {
 
             $price_table[] = [
                 'installment_number' => $i,
+                'payment_date' => $payment_date->format('d/m/Y'),
                 'installment_value' => round($installment_value, 2),
                 'interest' => round($interest, 2),
                 'amortization' => round($amortization, 2),
                 'remaining_balance' => round($financed_amount, 2)
             ];
+            
+            $payment_date = $this->getPaymentDate($payment_date);
 
             $total_amortization += $amortization;
             $total_installment_value += $installment_value;
@@ -81,5 +88,10 @@ class PriceTable {
     private function getAmortization(float $installment_value, float $interest): float
     {
         return $installment_value - $interest;
+    }
+
+    private function getPaymentDate(Carbon $payment_date): Carbon
+    {
+        return $payment_date->addMonth()->firstOfMonth();
     }
 }
