@@ -1,0 +1,24 @@
+<div class="price-table-container" *ngIf="price_table.length > 0">
+    <table class="price-table">
+        <thead>
+            <tr>
+                <th>Número da parcela</th>
+                <th>Data do pagamento</th>
+                <th>Valor</th>
+                <th>Juros</th>
+                <th>Amortização</th>
+                <th>Saldo devedor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of price_table">
+                <td>{{ row.installment_number }}</td>
+                <td class="price-numeric-value">{{ row.payment_date }}</td>
+                <td class="price-numeric-value">{{ row.installment_value | number:'1.2-2' }}</td>
+                <td class="price-numeric-value">{{ row.interest | number:'1.2-2' }}</td>
+                <td class="price-numeric-value">{{ row.amortization | number:'1.2-2' }}</td>
+                <td class="price-numeric-value">{{ row.remaining_balance | number:'1.2-2' }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

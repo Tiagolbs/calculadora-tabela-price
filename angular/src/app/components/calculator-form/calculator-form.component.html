@@ -1,0 +1,29 @@
+<div class="price-table-calculator">
+    <div class="calculator-form">
+        <app-form-errors-list [errors]="errors"></app-form-errors-list>
+        <div class="form-group">
+            <label for="financed_amount">Valor do financiamento  *</label>
+            <input currencyMask [options]="{ align: 'left', prefix: '', thousands: '.', decimal: ',' }" [(ngModel)]="financed_amount">
+        </div>
+
+        <div class="form-group">
+            <label for="initial_payment">Valor da entrada</label>
+            <input currencyMask [options]="{ align: 'left', prefix: '', thousands: '.', decimal: ',' }"  [(ngModel)]="initial_payment">
+        </div>
+
+        <div class="form-group">
+            <label for="number_of_months">Quantidade de meses *</label>
+            <input [(ngModel)]="number_of_months">
+        </div>
+
+        <div class="form-group">
+            <label for="interest_rate">Taxa de juros *</label>
+            <input currencyMask [options]="{ align: 'left', prefix: '', suffix: '', thousands: '.', decimal: ',' }" [(ngModel)]="interest_rate" [max]="5">
+        </div>
+
+        <div class="calculator-button">
+            <button (click)="generatePriceTable()">Calcular</button>
+        </div>
+    </div>
+</div>
+<app-price-table [price_table]="price_table"></app-price-table>

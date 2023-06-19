@@ -1,0 +1,54 @@
+.price-table-calculator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator-form {
+    width: 500px;
+    border: 1px solid black;
+    background-color: #333;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.calculator-form input {
+    width:485px;
+}
+
+.calculator-button {
+    text-align: center;
+    padding: 2px;
+    margin-top: 4px;
+}
+
+.calculator-button button {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.calculator-button button:hover {
+    background-color: #0056b3;
+}
+
+label {
+    font-weight: bold;
+    color: #fff;
+}
+
+input,
+textarea {
+  background-color: #444;
+  border: none;
+  border-radius: 4px;
+  padding: 8px;
+  color: #fff;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
