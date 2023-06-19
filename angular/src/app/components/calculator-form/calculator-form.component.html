@@ -1,26 +1,29 @@
-<div>
-    <app-form-errors-list [errors]="errors"></app-form-errors-list>
-    <div>
-        <label for="financed_amount">Valor do financiamento</label>
-        <input [(ngModel)]="financed_amount" type="number">
+<div class="price-table-calculator">
+    <div class="calculator-form">
+        <app-form-errors-list [errors]="errors"></app-form-errors-list>
+        <div class="form-group">
+            <label for="financed_amount">Valor do financiamento</label>
+            <input [(ngModel)]="financed_amount" type="number">
+        </div>
+
+        <div class="form-group">
+            <label for="initial_payment">Valor da entrada</label>
+            <input [(ngModel)]="initial_payment" type="number">
+        </div>
+
+        <div class="form-group">
+            <label for="number_of_months">Quantidade de meses</label>
+            <input [(ngModel)]="number_of_months" type="number">
+        </div>
+
+        <div class="form-group">
+            <label for="interest_rate">Taxa de juros</label>
+            <input [(ngModel)]="interest_rate" type="number">
+        </div>
+
+        <div class="calculator-button">
+            <button (click)="generatePriceTable()">Calcular</button>
+        </div>
     </div>
-
-    <div>
-        <label for="initial_payment">Valor da entrada</label>
-        <input [(ngModel)]="initial_payment" type="number">
-    </div>
-
-    <div>
-        <label for="number_of_months">Quantidade de meses</label>
-        <input [(ngModel)]="number_of_months" type="number">
-    </div>
-
-    <div>
-        <label for="interest_rate">Taxa de juros</label>
-        <input [(ngModel)]="interest_rate" type="number">
-    </div>
-
-    <button (click)="generatePriceTable()">Calcular</button>
-
-    <app-price-table [price_table]="price_table"></app-price-table>
 </div>
+<app-price-table [price_table]="price_table"></app-price-table>

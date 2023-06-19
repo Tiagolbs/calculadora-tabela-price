@@ -30,6 +30,7 @@ export class CalculatorFormComponent {
       },
       error: (error) => {
         this.errors = [];
+        this.price_table = [];
         if(error.error.errors){
           for(const row in error.error.errors){
             const rowErrors: Array<string> = error.error.errors[row];
