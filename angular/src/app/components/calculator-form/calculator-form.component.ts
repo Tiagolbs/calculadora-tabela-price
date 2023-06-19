@@ -12,6 +12,7 @@ export class CalculatorFormComponent {
   interest_rate: number = 0;
   initial_payment: number = 0;
   price_table: any[] = [];
+  errors: any[] = [];
 
   constructor(private priceTableService: PriceTableService) {}
 
@@ -23,11 +24,22 @@ export class CalculatorFormComponent {
       initial_payment: this.initial_payment
     };
 
-    this.priceTableService.getPriceTable(requestData).subscribe(
-        (response) => {
-          this.price_table = response;
-          console.log(response);
+    this.priceTableService.getPriceTable(requestData).subscribe({
+      next: (response) => {
+        this.price_table = response;
+      },
+      error: (error) => {
+        this.errors = [];
+        if(error.error.errors){
+          for(const row in error.error.errors){
+            const rowErrors: Array<string> = error.error.errors[row];
+            rowErrors.forEach(error => {
+              this.errors.push(error);
+            })
+          }
         }
-    );
+        console.log(this.errors);
+      }
+    });
   }
 }

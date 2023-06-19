@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 
 import { PriceTableComponent } from './components/price-table/price-table.component';
 import { CalculatorFormComponent } from './components/calculator-form/calculator-form.component';
+import { FormErrorsListComponent } from './components/form-errors-list/form-errors-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PriceTableComponent,
-    CalculatorFormComponent
+    CalculatorFormComponent,
+    FormErrorsListComponent
   ],
   imports: [
     BrowserModule,
