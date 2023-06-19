@@ -27,6 +27,7 @@ export class CalculatorFormComponent {
     this.priceTableService.getPriceTable(requestData).subscribe({
       next: (response) => {
         this.price_table = response;
+        this.errors = [];
       },
       error: (error) => {
         this.errors = [];
