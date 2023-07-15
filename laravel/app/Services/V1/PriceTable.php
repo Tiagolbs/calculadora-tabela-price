@@ -54,7 +54,7 @@ class PriceTable {
         return $price_table;
     }
 
-    private function createTableFirstRow(float $financed_amount): array
+    public function createTableFirstRow(float $financed_amount): array
     {
         return [
             'installment_number' => 0,
@@ -65,7 +65,7 @@ class PriceTable {
         ];
     }
 
-    private function createTableTotalRow(float $total_installment_value, float $total_amortization, float $total_interest): array
+    public function createTableTotalRow(float $total_installment_value, float $total_amortization, float $total_interest): array
     {
         return [
             'installment_number' => 'Total',
@@ -76,22 +76,22 @@ class PriceTable {
         ];
     }
 
-    private function getInstallmentValue(float $financed_amount, float $interest_rate, int $number_of_months): float
+    public function getInstallmentValue(float $financed_amount, float $interest_rate, int $number_of_months): float
     {
         return ($financed_amount * $interest_rate) / (1 - pow(1 + $interest_rate, -$number_of_months));
     }
 
-    private function getInterest(float $financed_amount, float $interest_rate): float
+    public function getInterest(float $financed_amount, float $interest_rate): float
     {
         return $financed_amount * $interest_rate;
     }
 
-    private function getAmortization(float $installment_value, float $interest): float
+    public function getAmortization(float $installment_value, float $interest): float
     {
         return $installment_value - $interest;
     }
 
-    private function getPaymentDate(Carbon $payment_date): Carbon
+    public function getPaymentDate(Carbon $payment_date): Carbon
     {
         return $payment_date->addMonth()->firstOfMonth();
     }
